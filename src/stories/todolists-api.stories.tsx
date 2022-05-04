@@ -168,14 +168,19 @@ export const UpdateTask = () => {
     const [todolistId, setTodolistId] = useState<string>('')
     const [taskId, setTaskId] = useState<string>('')
     const [title, setTitle] = useState<string>('')
+    const [description, setDescription] = useState<string>('description1')
+    const [status, setStatus] = useState<number>(0)
+    const [priority, setPriority] = useState<number>(0)
+    // const [startDate, setStartDate] = useState<string>('')
+    // const [deadline, setDeadline] = useState<string>('')
     const updateTask = () => {
         todolistAPI.updateTask(todolistId, taskId, {
             title: title,
-            description: '',
-            status: 0,
-            priority: 1,
+            description: description,
+            status: status,
+            priority: priority,
             startDate: '',
-            deadline: ''
+            deadline: '',
         })
             .then((resp) => {
                 setState(resp.data)
@@ -198,6 +203,26 @@ export const UpdateTask = () => {
                value={title}
                onChange={(e) => {
                    setTitle(e.currentTarget.value)
+               }}
+        />
+        <input placeholder={'enter task title'}
+               value={description}
+               onChange={(e) => {
+                   setDescription(e.currentTarget.value)
+               }}
+        />
+        <input placeholder={'enter task title'}
+               value={status}
+               type={'number'}
+               onChange={(e) => {
+                   setStatus(+e.currentTarget.value)
+               }}
+        />
+        <input placeholder={'enter task title'}
+               value={priority}
+               type={'number'}
+               onChange={(e) => {
+                   setPriority(+e.currentTarget.value)
                }}
         />
         <button onClick={updateTask}>Update task</button>
